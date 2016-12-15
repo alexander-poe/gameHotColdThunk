@@ -8,6 +8,27 @@
 
    export class Game extends React.Component {
 
+    componentDidMount() {
+      this.props.dispatch(
+        actions.getFewestGuesses(this.props.fewestGuesses);
+      )
+    }
+
+    updateFewestGuesses() {
+      if (won) {
+        console.log(this.props.dispach)
+        // value = call getFewest guesses
+        if (guesses.length < value) {
+          // postFewest
+          return guess.length
+        } else {
+          return value
+        }
+      } else {
+        return fewestGuesses
+      }
+    }
+
    render() {
       const guesses = this.props.guesses.map(function(guess, i) {
          return <span key={i}>{guess} </span>;
@@ -24,6 +45,7 @@
               </div>
               <p className="previous-guesses">{guesses}</p>
               <p className="total-guesses">Guesses: {guesses.length}</p>
+              <p className="fewest-guesses">Fewest Guesses: {updateFewestGuesses}</p>
              <NewGame />
             </div>
             { this.props.hideInstructions ? '' : <Instructions /> }
@@ -31,10 +53,11 @@
        )
      }
    }
-
+   // {this.props.won ? <update fewest quesses > : ''}
    const mapStateToProps = (state) => ({
      feedback: state.feedback,
      guesses: state.guesses,
+     fewestGuesses: state.fewestGuesses,
      hideInstructions: state.hideInstructions
    })
 

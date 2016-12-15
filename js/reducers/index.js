@@ -4,6 +4,7 @@ let initialValues = {
 			number: Math.floor((Math.random() * 100) + 1),
 			currentGuess: null,
 			guesses: [],
+      fewestGuesses: Infinity,
 			feedback: 'Make your first guess',
 			won: false,
 			hideInstructions: true
@@ -14,8 +15,7 @@ export const numberReducer = (state=initialValues, action) => {
   switch(action.type) {
 
     case 'NEW_GAME':
-      console.log('NEW GAME - number', state.number)
-  		return Object.assign({}, initialValues);
+      return Object.assign({}, initialValues);
 
     case 'GUESS_NUMBER':
   		let currentGuess = action.guess;
@@ -23,9 +23,8 @@ export const numberReducer = (state=initialValues, action) => {
 
   		let feedback = '';
   		let distance = Math.abs(currentGuess - state.number);
-      console.log('currentGuess', currentGuess)
       console.log('number', state.number)
-      console.log("distance", distance)
+   
 
       if (distance === 0) {
         feedback = 'Winner!';
@@ -43,10 +42,6 @@ export const numberReducer = (state=initialValues, action) => {
   		if (currentGuess === state.number) {
   			won = true;
   		}
-
-  		// console.log('current guess', currentGuess)
-  		// console.log('guesses', guesses)
-
   		return state = Object.assign({}, state,
   			{currentGuess,
   			guesses,
@@ -57,6 +52,14 @@ export const numberReducer = (state=initialValues, action) => {
       return Object.assign({}, state, {
         hideInstructions: action.bool
       })
+
+    case GET_FEWEST_GUESSES:
+      
+      return state;    
+
+    case  POST_FEWEST_GUESSES:
+      let greatest = (guesses.length < fewestGuesses) ? guesses.length : fewestGueses;
+      return Object.assign({}, state, { fewestGuesses: greatest }); 
 
     default:
       return state

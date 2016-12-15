@@ -5,7 +5,7 @@ import { toggleInstructions } from '../actions'
 const Instructions = ({ updateStatus }) => {
 
 	return (
-		<div className="instructions-container {toggleHide}">
+		<div className="instructions-container">
 			<h1>Instructions</h1>
 				<p>This is a Hot or Cold Number Guessing Game. The game goes like this:</p>
 				<ol className="instructions-list">
